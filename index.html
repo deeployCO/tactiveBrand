@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tactive. — Design System</title>
+<meta name="description" content="Tactive Design System. Brand book and foundations for Brand Defense Automation.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--sp-4) var(--sp-7);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-1);
+  }
+  .nav-mark { display: flex; align-items: center; gap: var(--sp-3); }
+  .nav-mark img { height: 22px; width: auto; }
+  .nav-meta {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--fg-3);
+    letter-spacing: 0.06em;
+  }
+
+  .wrap { max-width: 1180px; margin-inline: auto; padding-inline: var(--sp-7); }
+
+  .hero {
+    padding-block: clamp(var(--sp-9), 14vw, 200px) var(--sp-9);
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    color: var(--fg-3);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: var(--sp-5);
+  }
+  .hero-title {
+    font-size: var(--fs-display);
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    color: var(--fg-1);
+    margin: 0 0 var(--sp-5);
+    text-wrap: balance;
+    max-width: 14ch;
+  }
+  .hero-title .dot { color: var(--tac-pink-500); }
+  .hero-sub {
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.45;
+    color: var(--fg-2);
+    max-width: 56ch;
+    margin: 0 0 var(--sp-7);
+  }
+  .hero-sub em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--fg-1);
+    font-weight: 400;
+  }
+  .hero-meta {
+    display: flex; gap: var(--sp-7); flex-wrap: wrap;
+    padding-top: var(--sp-5);
+    border-top: 1px solid var(--border-1);
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .hero-meta-num {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: var(--fs-h4);
+    color: var(--fg-1);
+  }
+  .hero-meta-lab {
+    font-size: var(--fs-eyebrow);
+    color: var(--fg-3);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-5);
+    padding-bottom: var(--sp-9);
+  }
+  @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
+
+  .card {
+    position: relative;
+    display: flex; flex-direction: column;
+    padding: var(--sp-7);
+    min-height: 360px;
+    background: var(--bg-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-1);
+    transition: transform var(--dur-base) var(--ease-out),
+                box-shadow var(--dur-base) var(--ease-out),
+                border-color var(--dur-base) var(--ease-out);
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-3);
+    border-color: var(--tac-stone);
+  }
+  .card-num {
+    position: absolute; top: var(--sp-5); right: var(--sp-6);
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--fg-3);
+    letter-spacing: 0.12em;
+  }
+  .card-pin {
+    width: 10px; height: 10px; border-radius: 999px;
+    background: var(--tac-pink-500);
+    margin-bottom: var(--sp-5);
+  }
+  .card-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    color: var(--fg-3);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-bottom: var(--sp-3);
+  }
+  .card-title {
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+    color: var(--fg-1);
+    margin: 0 0 var(--sp-3);
+  }
+  .card-title .dot { color: var(--tac-pink-500); }
+  .card-desc {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--fg-2);
+    margin: 0 0 var(--sp-6);
+    max-width: 44ch;
+  }
+  .card-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-4);
+    margin-bottom: var(--sp-7);
+  }
+  .card-list li {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    color: var(--fg-2);
+  }
+  .card-list li::before {
+    content: "·"; color: var(--tac-pink-500);
+    margin-right: var(--sp-2); font-weight: 700;
+  }
+  .card-cta {
+    margin-top: auto;
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: var(--sp-2);
+    font-weight: 600;
+    color: var(--fg-1);
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--fg-1);
+    transition: color var(--dur-base) var(--ease-out),
+                border-color var(--dur-base) var(--ease-out);
+  }
+  .card:hover .card-cta {
+    color: var(--tac-pink-500);
+    border-bottom-color: var(--tac-pink-500);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-4);
+    padding-bottom: var(--sp-9);
+  }
+  @media (max-width: 820px) { .row { grid-template-columns: 1fr; } }
+
+  .mini {
+    display: flex; flex-direction: column;
+    padding: var(--sp-5);
+    background: var(--bg-1);
+    border: 1px solid var(--border-1);
+    border-radius: var(--r-md);
+    transition: background var(--dur-base) var(--ease-out),
+                box-shadow var(--dur-base) var(--ease-out);
+  }
+  .mini:hover { background: var(--bg-3); box-shadow: var(--shadow-1); }
+  .mini-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    color: var(--tac-pink-500);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-bottom: var(--sp-2);
+  }
+  .mini-title {
+    font-weight: 600; font-size: var(--fs-h4);
+    color: var(--fg-1); margin: 0 0 var(--sp-2);
+  }
+  .mini-desc {
+    font-size: var(--fs-small);
+    color: var(--fg-3);
+    margin: 0;
+  }
+
+  .foot {
+    border-top: 1px solid var(--border-1);
+    padding: var(--sp-7) 0;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: var(--sp-4);
+    font-size: var(--fs-small);
+    color: var(--fg-3);
+  }
+  .foot a { color: var(--fg-2); border-bottom: 1px dotted var(--fg-3); }
+  .foot a:hover { color: var(--tac-pink-500); border-color: var(--tac-pink-500); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-mark">
+    <img src="assets/tactive-wordmark-dark.svg" alt="tactive.">
+  </div>
+  <span class="nav-meta">DESIGN SYSTEM · v0.1</span>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="hero-eyebrow">00 / SYSTEM</div>
+    <h1 class="hero-title">tactive<span class="dot">.</span> design system</h1>
+    <p class="hero-sub">
+      The brand book, tokens, and component primitives behind <em>Brand Defense Automation</em>.
+      One agent. Three modes. Always defending.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">02</div>
+        <div class="hero-meta-lab">Pages</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">17</div>
+        <div class="hero-meta-lab">Preview cards</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">02</div>
+        <div class="hero-meta-lab">UI kits</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">v0.1</div>
+        <div class="hero-meta-lab">Version</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cards">
+
+    <a class="card" href="brand-system.html">
+      <span class="card-num">01</span>
+      <span class="card-pin" aria-hidden="true"></span>
+      <div class="card-eyebrow">01 / BRAND</div>
+      <h2 class="card-title">Brand System<span class="dot">.</span></h2>
+      <p class="card-desc">
+        Logo lockups, color anchors, typography, voice and tone, iconography
+        rules. The expressive layer.
+      </p>
+      <ul class="card-list">
+        <li>Logo</li><li>Color</li><li>Type</li><li>Voice</li><li>Icons</li>
+      </ul>
+      <span class="card-cta">Open brand system →</span>
+    </a>
+
+    <a class="card" href="foundations.html">
+      <span class="card-num">02</span>
+      <span class="card-pin" aria-hidden="true"></span>
+      <div class="card-eyebrow">02 / FOUNDATIONS</div>
+      <h2 class="card-title">Foundations<span class="dot">.</span></h2>
+      <p class="card-desc">
+        Design tokens and component primitives — spacing, radii, shadow, motion,
+        buttons, cards, badges, forms, threat rows.
+      </p>
+      <ul class="card-list">
+        <li>Tokens</li><li>Buttons</li><li>Cards</li><li>Badges</li><li>Forms</li>
+      </ul>
+      <span class="card-cta">Open foundations →</span>
+    </a>
+
+  </section>
+
+  <section class="row" aria-label="Other resources">
+    <a class="mini" href="ui_kits/marketing/index.html">
+      <div class="mini-eyebrow">UI KIT</div>
+      <h3 class="mini-title">Marketing kit →</h3>
+      <p class="mini-desc">Hero, nav, three modes, coverage grid, footer.</p>
+    </a>
+    <a class="mini" href="ui_kits/product/index.html">
+      <div class="mini-eyebrow">UI KIT</div>
+      <h3 class="mini-title">Product kit →</h3>
+      <p class="mini-desc">Sidebar nav, threat feed, detection card, takedown queue.</p>
+    </a>
+    <a class="mini" href="https://github.com/deeployCO/tactiveBrand">
+      <div class="mini-eyebrow">REPO</div>
+      <h3 class="mini-title">Source on GitHub →</h3>
+      <p class="mini-desc">Tokens, assets, preview cards, kits.</p>
+    </a>
+  </section>
+
+  <footer class="foot">
+    <div>tactive<span style="color:var(--tac-pink-500)">.</span> — Brand Defense Automation</div>
+    <div>
+      <a href="README.md">README</a> ·
+      <a href="HANDOFF.md">Handoff notes</a> ·
+      <a href="https://tactive.digital">tactive.digital</a>
+    </div>
+  </footer>
+
+</main>
+
+</body>
+</html>

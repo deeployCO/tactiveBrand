@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand System — tactive.</title>
+<meta name="description" content="Tactive brand system — logo, color, type, voice, and iconography.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="colors_and_type.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+  html { scroll-behavior: smooth; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: var(--sp-4) var(--sp-7);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-1);
+  }
+  .nav-mark img { height: 22px; width: auto; }
+  .nav-links { display: flex; gap: var(--sp-6); list-style: none; margin: 0; padding: 0; }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--fg-3);
+    transition: color var(--dur-base) var(--ease-out);
+  }
+  .nav-links a:hover { color: var(--tac-pink-500); }
+  .nav-back {
+    font-family: var(--font-mono);
+    font-size: var(--fs-micro);
+    color: var(--fg-3);
+    letter-spacing: 0.06em;
+  }
+  .nav-back:hover { color: var(--tac-pink-500); }
+
+  .wrap { max-width: 1180px; margin-inline: auto; padding-inline: var(--sp-7); }
+
+  /* Section */
+  .section {
+    padding-block: var(--sp-9);
+    border-top: 1px solid var(--border-1);
+  }
+  .section:first-of-type { border-top: none; }
+  .sec-head {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--sp-7);
+    margin-bottom: var(--sp-7);
+    align-items: baseline;
+  }
+  @media (max-width: 720px) {
+    .sec-head { grid-template-columns: 1fr; gap: var(--sp-3); }
+  }
+  .sec-num {
+    font-family: var(--font-mono);
+    font-size: var(--fs-h2);
+    font-weight: 400;
+    color: var(--border-2);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .sec-title {
+    font-size: var(--fs-h2);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 0;
+  }
+  .sec-title .dot { color: var(--tac-pink-500); }
+  .sec-desc {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--fg-2);
+    max-width: 60ch;
+    margin: var(--sp-3) 0 0;
+  }
+  .sec-desc em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--fg-1);
+    font-weight: 400;
+  }
+
+  /* Cover */
+  .cover {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: var(--sp-9);
+    border-bottom: 1px solid var(--border-1);
+  }
+  .cover-eye {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    color: var(--fg-3);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: var(--sp-6);
+  }
+  .cover-title {
+    font-size: var(--fs-display);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    margin: 0 0 var(--sp-5);
+    text-wrap: balance;
+    max-width: 16ch;
+  }
+  .cover-title .dot { color: var(--tac-pink-500); }
+  .cover-sub {
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.4;
+    color: var(--fg-2);
+    max-width: 56ch;
+    margin: 0 0 var(--sp-7);
+  }
+  .cover-rule { width: 56px; height: 3px; background: var(--tac-pink-500); margin-bottom: var(--sp-5); }
+  .cover-meta {
+    margin-top: var(--sp-7);
+    display: flex; flex-wrap: wrap; gap: var(--sp-7);
+  }
+  .cover-stat-num {
+    font-family: var(--font-mono);
+    font-size: var(--fs-h3);
+    font-weight: 600;
+    color: var(--fg-1);
+    letter-spacing: -0.01em;
+  }
+  .cover-stat-lab {
+    font-size: var(--fs-eyebrow);
+    color: var(--fg-3);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  /* Logo */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-3);
+  }
+  @media (max-width: 720px) { .logo-grid { grid-template-columns: 1fr; } }
+  .logo-tile {
+    position: relative;
+    border-radius: var(--r-md);
+    padding: var(--sp-7);
+    min-height: 220px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border-1);
+  }
+  .logo-tile.light { background: var(--bg-1); }
+  .logo-tile.dark  { background: var(--tac-navy-900); border-color: var(--tac-navy-900); }
+  .logo-tile img { max-width: 70%; height: auto; }
+  .logo-tile.dark .word {
+    color: #fff; font-weight: 800; font-size: clamp(40px, 6vw, 64px);
+    letter-spacing: -0.04em; font-family: var(--font-sans);
+    display: inline-flex; align-items: flex-end;
+  }
+  .logo-tile.dark .word .pink { color: var(--tac-pink-500); margin-left: 2px; }
+  .tile-tag {
+    position: absolute; top: var(--sp-3); left: var(--sp-4);
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--fg-3);
+    font-weight: 600;
+  }
+  .logo-tile.dark .tile-tag { color: rgba(255,255,255,0.5); }
+
+  .mark-row {
+    margin-top: var(--sp-3);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3);
+  }
+  @media (max-width: 720px) { .mark-row { grid-template-columns: 1fr 1fr; } }
+  .mark-tile {
+    position: relative;
+    border: 1px solid var(--border-1);
+    border-radius: var(--r-md);
+    padding: var(--sp-7);
+    background: var(--bg-1);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 130px;
+  }
+  .mark-dot { width: 56px; height: 56px; border-radius: 999px; background: var(--tac-pink-500); }
+  .mark-dot.sm { width: 28px; height: 28px; }
+  .mark-dot.xs { width: 12px; height: 12px; }
+
+  .rules-grid {
+    margin-top: var(--sp-7);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-2);
+  }
+  @media (max-width: 720px) { .rules-grid { grid-template-columns: 1fr; } }
+  .rule {
+    padding: var(--sp-5);
+    border: 1px solid var(--border-1);
+    border-radius: var(--r-sm);
+    background: var(--bg-1);
+  }
+  .rule-h {
+    display: flex; align-items: center; gap: var(--sp-2);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    margin-bottom: var(--sp-2);
+  }
+  .rule-h.allow { color: var(--tac-success); }
+  .rule-h.deny { color: var(--tac-pink-500); }
+  .rule-b { font-size: var(--fs-small); color: var(--fg-2); margin: 0; line-height: 1.55; }
+  .rule [data-lucide] { width: 14px; height: 14px; }
+
+  /* Colors */
+  .anchor-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-7);
+  }
+  @media (max-width: 720px) { .anchor-row { grid-template-columns: 1fr; } }
+  .anchor {
+    border-radius: var(--r-md);
+    padding: var(--sp-7);
+    min-height: 240px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .anchor.navy { background: var(--tac-navy-900); color: #fff; }
+  .anchor.pink { background: var(--tac-pink-500); color: #fff; }
+  .anchor-eye {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    opacity: 0.7;
+  }
+  .anchor-name { font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.02em; margin-top: var(--sp-3); }
+  .anchor-meta { display: flex; gap: var(--sp-6); margin-top: var(--sp-5); flex-wrap: wrap; }
+  .anchor-meta div { display: flex; flex-direction: column; gap: 2px; }
+  .anchor-meta .lab { font-size: var(--fs-eyebrow); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.14em; }
+  .anchor-meta .val { font-family: var(--font-mono); font-size: var(--fs-small); }
+
+  .ramp-label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--fg-3);
+    margin: var(--sp-7) 0 var(--sp-3);
+  }
+  .ramp {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--sp-2);
+  }
+  @media (max-width: 720px) { .ramp { grid-template-columns: repeat(3, 1fr); } }
+  .sw {
+    border-radius: var(--r-sm);
+    padding: var(--sp-4);
+    min-height: 100px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    border: 1px solid var(--border-1);
+  }
+  .sw .nm { font-size: var(--fs-small); font-weight: 600; }
+  .sw .hx { font-family: var(--font-mono); font-size: var(--fs-micro); opacity: 0.7; margin-top: 2px; }
+
+  /* Type */
+  .t-display {
+    font-size: clamp(56px, 7vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    margin: 0 0 var(--sp-2);
+    text-wrap: balance;
+  }
+  .t-display .dot { color: var(--tac-pink-500); }
+  .t-serif {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--fg-1);
+    margin: var(--sp-7) 0 var(--sp-3);
+  }
+  .scale {
+    margin-top: var(--sp-7);
+    display: grid; gap: var(--sp-3);
+  }
+  .scale-row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: var(--sp-5);
+    align-items: baseline;
+    padding-block: var(--sp-3);
+    border-top: 1px solid var(--border-1);
+  }
+  .scale-row:first-child { border-top: none; }
+  .scale-meta {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    color: var(--fg-3);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .scale-sample { color: var(--fg-1); margin: 0; }
+  .scale-sample.h1 { font-size: var(--fs-h1); font-weight: 700; line-height: 1.08; letter-spacing: -0.025em; }
+  .scale-sample.h2 { font-size: var(--fs-h2); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+  .scale-sample.h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.25; }
+  .scale-sample.h4 { font-size: var(--fs-h4); font-weight: 600; line-height: 1.35; }
+  .scale-sample.body { font-size: var(--fs-body); color: var(--fg-2); line-height: 1.55; }
+  .scale-sample.small { font-size: var(--fs-small); color: var(--fg-3); }
+  .scale-sample.eye {
+    font-size: var(--fs-eyebrow); font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--tac-pink-500);
+  }
+  .mono-block {
+    margin-top: var(--sp-7);
+    padding: var(--sp-6);
+    border: 1px solid var(--border-1);
+    border-radius: var(--r-md);
+    background: var(--tac-navy-900);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+  }
+  .mono-block .pink { color: var(--tac-pink-400); }
+  .mono-block .dim { color: rgba(255,255,255,0.5); }
+
+  /* Voice */
+  .voice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-3);
+  }
+  @media (max-width: 720px) { .voice-grid { grid-template-columns: 1fr; } }
+  .voice-card {
+    padding: var(--sp-6);
+    border: 1px solid var(--border-1);
+    border-radius: var(--r-md);
+    background: var(--bg-1);
+  }
+  .voice-eye {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    color: var(--tac-pink-500);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-bottom: var(--sp-3);
+  }
+  .voice-quote {
+    font-size: var(--fs-h3);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.012em;
+    color: var(--fg-1);
+    margin: 0 0 var(--sp-4);
+  }
+  .voice-q .dot { color: var(--tac-pink-500); }
+  .voice-note { font-size: var(--fs-small); color: var(--fg-3); margin: 0; line-height: 1.5; }
+
+  .word-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-3);
+    margin-top: var(--sp-7);
+  }
+  @media (max-width: 720px) { .word-row { grid-template-columns: 1fr; } }
+  .word-card {
+    padding: var(--sp-6);
+    border: 1px solid var(--border-1);
+    border-radius: var(--r-md);
+  }
+  .word-card.use { background: var(--bg-1); }
+  .word-card.skip { background: var(--bg-3); }
+  .word-h {
+    display: flex; align-items: center; gap: var(--sp-2);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    margin-bottom: var(--sp-3);
+  }
+  .word-h.use { color: var(--tac-success); }
+  .word-h.skip { color: var(--tac-slate); }
+  .word-h [data-lucide] { width: 14px; height: 14px; }
+  .word-list {
+    display: flex; flex-wrap: wrap; gap: var(--sp-2);
+    list-style: none; padding: 0; margin: 0;
+  }
+  .word-list li {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(15,27,45,0.04);
+    color: var(--fg-2);
+  }
+  .word-card.skip .word-list li { color: var(--fg-3); text-decoration: line-through; text-decoration-color: var(--tac-slate); }
+
+  /* Iconography */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: var(--sp-2);
+  }
+  @media (max-width: 820px) { .icon-grid { grid-template-columns: repeat(4, 1fr); } }
+  .icon-tile {
+    aspect-ratio: 1;
+    border: 1px solid var(--border-1);
+    border-radius: var(--r-sm);
+    background: var(--bg-1);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--fg-1);
+    transition: all var(--dur-base) var(--ease-out);
+  }
+  .icon-tile:hover { color: var(--tac-pink-500); border-color: var(--tac-pink-500); transform: translateY(-2px); }
+  .icon-tile [data-lucide] { width: 22px; height: 22px; stroke-width: 1.75; }
+
+  .foot {
+    border-top: 1px solid var(--border-1);
+    padding: var(--sp-7) 0;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: var(--sp-4);
+    font-size: var(--fs-small);
+    color: var(--fg-3);
+  }
+  .foot a { color: var(--fg-2); border-bottom: 1px dotted var(--fg-3); }
+  .foot a:hover { color: var(--tac-pink-500); border-color: var(--tac-pink-500); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a href="index.html" class="nav-mark">
+    <img src="assets/tactive-wordmark-dark.svg" alt="tactive.">
+  </a>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#logo">Logo</a></li>
+      <li><a href="#color">Color</a></li>
+      <li><a href="#type">Type</a></li>
+      <li><a href="#voice">Voice</a></li>
+      <li><a href="#icons">Icons</a></li>
+    </ul>
+  </nav>
+  <a href="index.html" class="nav-back">← System</a>
+</header>
+
+<main class="wrap">
+
+  <section class="cover">
+    <div class="cover-eye">01 / BRAND SYSTEM</div>
+    <h1 class="cover-title">The expressive layer<span class="dot">.</span></h1>
+    <div class="cover-rule"></div>
+    <p class="cover-sub">
+      Logo lockups, color anchors, typography, voice and tone, iconography.
+      Everything that makes a surface feel <em>tactive</em>.
+    </p>
+    <div class="cover-meta">
+      <div><div class="cover-stat-num">2</div><div class="cover-stat-lab">Anchor colors</div></div>
+      <div><div class="cover-stat-num">3</div><div class="cover-stat-lab">Type families</div></div>
+      <div><div class="cover-stat-num">5</div><div class="cover-stat-lab">Logo assets</div></div>
+      <div><div class="cover-stat-num">→</div><div class="cover-stat-lab">One brand mark</div></div>
+    </div>
+  </section>
+
+  <!-- LOGO -->
+  <section class="section" id="logo">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <div>
+        <h2 class="sec-title">Logo<span class="dot">.</span></h2>
+        <p class="sec-desc">
+          Lowercase wordmark in deep navy with a single hot-pink dot. The dot is
+          the brand mark — it can stand alone as a status indicator, a section
+          period, or a favicon.
+        </p>
+      </div>
+    </div>
+
+    <div class="logo-grid">
+      <div class="logo-tile light">
+        <span class="tile-tag">Wordmark · primary</span>
+        <img src="assets/tactive-logo.png" alt="tactive logo">
+      </div>
+      <div class="logo-tile dark">
+        <span class="tile-tag">Wordmark · inverse</span>
+        <span class="word">tactive<span class="pink">.</span></span>
+      </div>
+    </div>
+
+    <div class="mark-row">
+      <div class="mark-tile">
+        <span class="tile-tag">Mark · 56px</span>
+        <span class="mark-dot"></span>
+      </div>
+      <div class="mark-tile">
+        <span class="tile-tag">Mark · 28px</span>
+        <span class="mark-dot sm"></span>
+      </div>
+      <div class="mark-tile">
+        <span class="tile-tag">Mark · 12px (status)</span>
+        <span class="mark-dot xs"></span>
+      </div>
+    </div>
+
+    <div class="rules-grid">
+      <div class="rule">
+        <div class="rule-h allow"><i data-lucide="check"></i>DO</div>
+        <p class="rule-b">Always lowercase. The wordmark ends with a pink period — it's the brand mark, not punctuation. Treat it as part of the lockup.</p>
+      </div>
+      <div class="rule">
+        <div class="rule-h allow"><i data-lucide="check"></i>DO</div>
+        <p class="rule-b">Echo the dot in major headlines: end the line with a small pink period. Sparingly — once per section is plenty.</p>
+      </div>
+      <div class="rule">
+        <div class="rule-h deny"><i data-lucide="x"></i>DON'T</div>
+        <p class="rule-b">Capitalize as <code class="tac-mono">Tactive</code> in the lockup. In flowing body copy, capitalized <em>Tactive</em> is fine.</p>
+      </div>
+      <div class="rule">
+        <div class="rule-h deny"><i data-lucide="x"></i>DON'T</div>
+        <p class="rule-b">Recolor the dot. The pink is fixed — <code class="tac-mono">#E91A4F</code>. No gradients, no shadows, no rotation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLOR -->
+  <section class="section" id="color">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <div>
+        <h2 class="sec-title">Color<span class="dot">.</span></h2>
+        <p class="sec-desc">
+          Two anchors do most of the work: <em>deep navy</em> from the wordmark
+          and <em>hot pink</em> from the dot. Pink is the only warm hue in the
+          system — that's what makes it pop.
+        </p>
+      </div>
+    </div>
+
+    <div class="anchor-row">
+      <div class="anchor navy">
+        <div class="anchor-eye">Anchor 01</div>
+        <div>
+          <div class="anchor-name">Deep Navy</div>
+          <div class="anchor-meta">
+            <div><div class="lab">Hex</div><div class="val">#0F1B2D</div></div>
+            <div><div class="lab">Token</div><div class="val">--tac-navy-900</div></div>
+            <div><div class="lab">Use</div><div class="val">Text · inverse bg</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="anchor pink">
+        <div class="anchor-eye">Anchor 02</div>
+        <div>
+          <div class="anchor-name">Hot Pink</div>
+          <div class="anchor-meta">
+            <div><div class="lab">Hex</div><div class="val">#E91A4F</div></div>
+            <div><div class="lab">Token</div><div class="val">--tac-pink-500</div></div>
+            <div><div class="lab">Use</div><div class="val">Accent · CTA · danger</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ramp-label">Navy ramp</div>
+    <div class="ramp">
+      <div class="sw" style="background:#0F1B2D;color:#fff"><div class="nm">navy-900</div><div class="hx">#0F1B2D</div></div>
+      <div class="sw" style="background:#16243A;color:#fff"><div class="nm">navy-800</div><div class="hx">#16243A</div></div>
+      <div class="sw" style="background:#1E3050;color:#fff"><div class="nm">navy-700</div><div class="hx">#1E3050</div></div>
+      <div class="sw" style="background:#2A4368;color:#fff"><div class="nm">navy-600</div><div class="hx">#2A4368</div></div>
+      <div class="sw" style="background:#4A6586;color:#fff"><div class="nm">navy-500</div><div class="hx">#4A6586</div></div>
+      <div class="sw" style="background:#6B7B91;color:#fff"><div class="nm">slate</div><div class="hx">#6B7B91</div></div>
+      <div class="sw" style="background:#3A4A60;color:#fff"><div class="nm">graphite</div><div class="hx">#3A4A60</div></div>
+    </div>
+
+    <div class="ramp-label">Pink ramp</div>
+    <div class="ramp">
+      <div class="sw" style="background:#E91A4F;color:#fff"><div class="nm">pink-500</div><div class="hx">#E91A4F</div></div>
+      <div class="sw" style="background:#FF3D6E;color:#fff"><div class="nm">pink-400</div><div class="hx">#FF3D6E</div></div>
+      <div class="sw" style="background:#FF6E92;color:#fff"><div class="nm">pink-300</div><div class="hx">#FF6E92</div></div>
+      <div class="sw" style="background:#FFE3EC;color:#0F1B2D"><div class="nm">pink-100</div><div class="hx">#FFE3EC</div></div>
+      <div class="sw" style="background:#fff;color:#0F1B2D"><div class="nm">white</div><div class="hx">#FFFFFF</div></div>
+      <div class="sw" style="background:#FAFBFC;color:#0F1B2D"><div class="nm">paper</div><div class="hx">#FAFBFC</div></div>
+      <div class="sw" style="background:#F2F4F7;color:#0F1B2D"><div class="nm">mist</div><div class="hx">#F2F4F7</div></div>
+    </div>
+
+    <div class="ramp-label">Semantic</div>
+    <div class="ramp">
+      <div class="sw" style="background:#1FA971;color:#fff"><div class="nm">success</div><div class="hx">#1FA971</div></div>
+      <div class="sw" style="background:#E89923;color:#fff"><div class="nm">warn</div><div class="hx">#E89923</div></div>
+      <div class="sw" style="background:#E91A4F;color:#fff"><div class="nm">danger</div><div class="hx">#E91A4F</div></div>
+      <div class="sw" style="background:#2563D9;color:#fff"><div class="nm">info</div><div class="hx">#2563D9</div></div>
+      <div class="sw" style="background:#E6F7EF;color:#0F1B2D"><div class="nm">success-bg</div><div class="hx">#E6F7EF</div></div>
+      <div class="sw" style="background:#FFF4E0;color:#0F1B2D"><div class="nm">warn-bg</div><div class="hx">#FFF4E0</div></div>
+      <div class="sw" style="background:#E3EEFF;color:#0F1B2D"><div class="nm">info-bg</div><div class="hx">#E3EEFF</div></div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section class="section" id="type">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <div>
+        <h2 class="sec-title">Type<span class="dot">.</span></h2>
+        <p class="sec-desc">
+          <em>Inter</em> for everything UI and marketing. <em>Instrument Serif</em>
+          for one editorial accent per screen. <em>JetBrains Mono</em> for numerics,
+          IDs, timestamps. Display headlines are tight and large.
+        </p>
+      </div>
+    </div>
+
+    <div class="t-display">One agent. Three modes. Always defending<span class="dot">.</span></div>
+    <div class="t-serif">your brand's autonomous defense layer</div>
+
+    <div class="scale">
+      <div class="scale-row">
+        <div class="scale-meta">EYEBROW · 11/600</div>
+        <p class="scale-sample eye">01 / DETECT</p>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta">H1 · 36–56</div>
+        <p class="scale-sample h1">Defend the brand surface, automatically.</p>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta">H2 · 28–40</div>
+        <p class="scale-sample h2">Continuous monitoring across Meta, Google, TikTok.</p>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta">H3 · 22</div>
+        <p class="scale-sample h3">Submits takedowns through platform APIs.</p>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta">H4 · 18</div>
+        <p class="scale-sample h4">Brand Defense, Campaign Defense, Competitive Defense.</p>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta">BODY · 16</div>
+        <p class="scale-sample body">Marketing tools bolt monitoring on as a side feature. Enterprise vendors charge $50k+. We sit in between, built for the mid-market: CMO and CISO co-buyers, performance marketing leads, brand directors.</p>
+      </div>
+      <div class="scale-row">
+        <div class="scale-meta">SMALL · 14</div>
+        <p class="scale-sample small">Coverage surfaces: Meta, Google, TikTok, YouTube, app stores, marketplaces, open web, messaging.</p>
+      </div>
+    </div>
+
+    <div class="mono-block">
+      <span class="dim">// JetBrains Mono · numerics &amp; IDs</span><br>
+      <span class="pink">THR-08421</span> · 2026-05-02 14:22:08 · <span class="pink">$199</span> / 7d<br>
+      <span class="dim">monitoring → detection → takedown</span> · 1.04s
+    </div>
+  </section>
+
+  <!-- VOICE -->
+  <section class="section" id="voice">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <div>
+        <h2 class="sec-title">Voice<span class="dot">.</span></h2>
+        <p class="sec-desc">
+          Confident, technical, calm. Reads like a security product written by
+          someone who also writes good marketing copy. Comfortable with short,
+          declarative sentences. <em>No exclamation marks. No emoji.</em>
+        </p>
+      </div>
+    </div>
+
+    <div class="voice-grid">
+      <div class="voice-card">
+        <div class="voice-eye">HERO · MANIFESTO</div>
+        <p class="voice-quote voice-q">One agent. Three modes. Always defending<span class="dot">.</span></p>
+        <p class="voice-note">Three-beat list. Period fragments. Confidence by understatement.</p>
+      </div>
+      <div class="voice-card">
+        <div class="voice-eye">FEATURE · PLAIN</div>
+        <p class="voice-quote">Submits takedowns through platform APIs.</p>
+        <p class="voice-note">Mechanical. Direct. No "we help you." Just what it does.</p>
+      </div>
+      <div class="voice-card">
+        <div class="voice-eye">POSITIONING · POINTED</div>
+        <p class="voice-quote">Marketing tools bolt monitoring on. We start there.</p>
+        <p class="voice-note">Sharp comparison. "We" appears sparingly — mostly in pricing/about.</p>
+      </div>
+      <div class="voice-card">
+        <div class="voice-eye">CTA · DIRECT VERB</div>
+        <p class="voice-quote">Run my audit →</p>
+        <p class="voice-note">Action arrow → is a brand device, not decoration. Use in CTAs and step labels.</p>
+      </div>
+    </div>
+
+    <div class="word-row">
+      <div class="word-card use">
+        <div class="word-h use"><i data-lucide="check"></i>WORDS WE USE</div>
+        <ul class="word-list">
+          <li>agent</li><li>autonomous</li><li>continuous</li><li>surface</li>
+          <li>signal</li><li>threat</li><li>takedown</li><li>defense</li>
+          <li>mode</li><li>lens</li><li>run</li>
+        </ul>
+      </div>
+      <div class="word-card skip">
+        <div class="word-h skip"><i data-lucide="ban"></i>WORDS WE AVOID</div>
+        <ul class="word-list">
+          <li>journey</li><li>empower</li><li>unleash</li><li>revolutionary</li>
+          <li>game-changer</li><li>simply</li><li>just</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ICONOGRAPHY -->
+  <section class="section" id="icons">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <div>
+        <h2 class="sec-title">Iconography<span class="dot">.</span></h2>
+        <p class="sec-desc">
+          <em>Lucide</em> at <code class="tac-mono">stroke-width: 1.75</code>.
+          Line style only — no fills. Inherits <code class="tac-mono">currentColor</code>.
+          Default 16px, sidebar 18px, eyebrow 20–24px. The pink dot is itself an icon.
+        </p>
+      </div>
+    </div>
+
+    <div class="icon-grid">
+      <div class="icon-tile" title="shield"><i data-lucide="shield"></i></div>
+      <div class="icon-tile" title="eye"><i data-lucide="eye"></i></div>
+      <div class="icon-tile" title="radar"><i data-lucide="radar"></i></div>
+      <div class="icon-tile" title="target"><i data-lucide="target"></i></div>
+      <div class="icon-tile" title="radio"><i data-lucide="radio"></i></div>
+      <div class="icon-tile" title="link-2-off"><i data-lucide="link-2-off"></i></div>
+      <div class="icon-tile" title="circle-alert"><i data-lucide="circle-alert"></i></div>
+      <div class="icon-tile" title="gavel"><i data-lucide="gavel"></i></div>
+      <div class="icon-tile" title="bell"><i data-lucide="bell"></i></div>
+      <div class="icon-tile" title="lock"><i data-lucide="lock"></i></div>
+      <div class="icon-tile" title="zap"><i data-lucide="zap"></i></div>
+      <div class="icon-tile" title="cpu"><i data-lucide="cpu"></i></div>
+      <div class="icon-tile" title="bar-chart"><i data-lucide="bar-chart-3"></i></div>
+      <div class="icon-tile" title="search"><i data-lucide="search"></i></div>
+      <div class="icon-tile" title="filter"><i data-lucide="filter"></i></div>
+      <div class="icon-tile" title="arrow-right"><i data-lucide="arrow-right"></i></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div>tactive<span style="color:var(--tac-pink-500)">.</span> — Brand System</div>
+    <div>
+      <a href="index.html">← System</a> ·
+      <a href="foundations.html">Foundations →</a> ·
+      <a href="https://github.com/deeployCO/tactiveBrand">GitHub</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  if (window.lucide) { lucide.createIcons(); }
+</script>
+</body>
+</html>
