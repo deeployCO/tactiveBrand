@@ -1,0 +1,200 @@
+/* =========================================================
+   Tactive Design System — Colors & Type Tokens
+   ========================================================= */
+
+/* Fonts: Inter (UI) + Instrument Serif (editorial accents) +
+   JetBrains Mono (code/numerics). Loaded from Google Fonts;
+   if you want self-hosted .woff2, drop them in /fonts and
+   replace the @import below. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ---------- Brand core ---------- */
+  --tac-navy-900: #0F1B2D;   /* logo wordmark, primary text */
+  --tac-navy-800: #16243A;
+  --tac-navy-700: #1E3050;
+  --tac-navy-600: #2A4368;
+  --tac-navy-500: #4A6586;
+
+  --tac-pink-500: #E91A4F;   /* the dot — primary accent */
+  --tac-pink-400: #FF3D6E;
+  --tac-pink-300: #FF6E92;
+  --tac-pink-100: #FFE3EC;
+
+  /* ---------- Neutrals (warm-cool light) ---------- */
+  --tac-white:    #FFFFFF;
+  --tac-paper:    #FAFBFC;   /* page bg */
+  --tac-mist:     #F2F4F7;   /* subtle surfaces */
+  --tac-fog:      #E6EAF0;   /* dividers, hairlines */
+  --tac-stone:    #C9D0DA;
+  --tac-slate:    #6B7B91;
+  --tac-graphite: #3A4A60;
+
+  /* ---------- Semantic status ---------- */
+  --tac-success: #1FA971;
+  --tac-success-bg: #E6F7EF;
+  --tac-warn:    #E89923;
+  --tac-warn-bg: #FFF4E0;
+  --tac-danger:  #E91A4F;     /* shares with brand pink */
+  --tac-danger-bg: #FFE3EC;
+  --tac-info:    #2563D9;
+  --tac-info-bg: #E3EEFF;
+
+  /* ---------- Foreground / background semantic ---------- */
+  --fg-1: var(--tac-navy-900);   /* primary text */
+  --fg-2: var(--tac-graphite);   /* secondary text */
+  --fg-3: var(--tac-slate);      /* tertiary / muted */
+  --fg-on-dark: #FFFFFF;
+  --fg-accent:  var(--tac-pink-500);
+
+  --bg-1: var(--tac-white);      /* card / primary surface */
+  --bg-2: var(--tac-paper);      /* page */
+  --bg-3: var(--tac-mist);       /* subtle */
+  --bg-inverse: var(--tac-navy-900);
+
+  --border-1: var(--tac-fog);
+  --border-2: var(--tac-stone);
+  --border-strong: var(--tac-navy-900);
+
+  /* ---------- Type families ---------- */
+  --font-sans:   'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif:  'Instrument Serif', 'Times New Roman', Georgia, serif;
+  --font-mono:   'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* ---------- Type scale (clamped, modern) ---------- */
+  --fs-display:  clamp(48px, 6vw, 88px);
+  --fs-h1:       clamp(36px, 4vw, 56px);
+  --fs-h2:       clamp(28px, 3vw, 40px);
+  --fs-h3:       22px;
+  --fs-h4:       18px;
+  --fs-body:     16px;
+  --fs-small:    14px;
+  --fs-micro:    12px;
+  --fs-eyebrow:  11px;
+
+  /* ---------- Spacing (4px base) ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --sp-10: 128px;
+
+  /* ---------- Radii ---------- */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  /* ---------- Shadows (soft, modern, light theme) ---------- */
+  --shadow-1: 0 1px 2px rgba(15, 27, 45, 0.04), 0 1px 3px rgba(15, 27, 45, 0.06);
+  --shadow-2: 0 4px 12px rgba(15, 27, 45, 0.06), 0 2px 4px rgba(15, 27, 45, 0.04);
+  --shadow-3: 0 12px 32px rgba(15, 27, 45, 0.08), 0 4px 8px rgba(15, 27, 45, 0.05);
+  --shadow-4: 0 24px 60px rgba(15, 27, 45, 0.12), 0 8px 16px rgba(15, 27, 45, 0.06);
+  --shadow-pink: 0 8px 24px rgba(233, 26, 79, 0.25);
+
+  /* ---------- Motion ---------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 360ms;
+}
+
+/* =========================================================
+   Semantic element styles — apply via class OR base tag
+   ========================================================= */
+html, body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  color: var(--fg-1);
+  background: var(--bg-2);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.tac-display {
+  font-family: var(--font-sans);
+  font-size: var(--fs-display);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+.tac-display-serif {
+  font-family: var(--font-serif);
+  font-size: var(--fs-display);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--fg-1);
+}
+
+.tac-h1, h1 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h1);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+.tac-h2, h2 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h2);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--fg-1);
+}
+.tac-h3, h3 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h3);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  color: var(--fg-1);
+}
+.tac-h4, h4 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h4);
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--fg-1);
+}
+.tac-body, p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--fg-2);
+  text-wrap: pretty;
+}
+.tac-small {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--fg-3);
+}
+.tac-eyebrow {
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-accent);
+}
+.tac-mono, code, kbd {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  font-feature-settings: 'tnum' 1;
+}
+.tac-numeric {
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+}

@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Logo</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;display:flex;align-items:center;justify-content:center;background:var(--bg-2);height:100vh}
+  .grid{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;width:100%}
+  .panel{border:1px solid var(--border-1);border-radius:12px;padding:24px;display:flex;align-items:center;justify-content:center;background:#fff}
+  .dark{background:var(--tac-navy-900)}
+  .panel img{max-width:100%;height:auto}
+  .mark{display:flex;gap:14px;align-items:center}
+  .mark .dot{width:36px;height:36px;border-radius:999px;background:var(--tac-pink-500)}
+  .label{position:absolute;top:8px;left:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);font-weight:600}
+  .panel{position:relative}
+</style></head>
+<body>
+<div class="grid">
+  <div class="panel"><span class="label">Wordmark</span><img src="../assets/tactive-logo.png" alt=""></div>
+  <div class="panel dark"><span class="label" style="color:rgba(255,255,255,.5)">Inverse</span>
+    <div class="mark"><span style="color:#fff;font-size:48px;font-weight:800;letter-spacing:-.04em;font-family:Inter">tactive</span><span class="dot" style="margin-left:-8px;align-self:flex-end;margin-bottom:6px"></span></div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,12 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Forms</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>body{margin:0;padding:24px;background:var(--bg-2);font-family:Inter}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:block;font-size:12px;font-weight:600;color:#3A4A60;margin-bottom:6px;letter-spacing:.02em}input,select{width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid #E6EAF0;border-radius:8px;font-size:14px;font-family:inherit;background:#fff;color:#0F1B2D;transition:all .15s}input:focus,select:focus{outline:none;border-color:#E91A4F;box-shadow:0 0 0 3px rgba(233,26,79,.15)}.help{font-size:12px;color:#6B7B91;margin-top:4px}.checkrow{display:flex;align-items:center;gap:8px;margin-top:4px;font-size:14px}.tog{width:36px;height:20px;background:#E91A4F;border-radius:999px;position:relative}.tog:after{content:'';position:absolute;top:2px;right:2px;width:16px;height:16px;background:#fff;border-radius:999px}</style></head>
+<body>
+<div class="grid">
+  <div><label>Brand domain</label><input value="acme.com"><div class="help">Primary domain we'll defend</div></div>
+  <div><label>Surface</label><select><option>Meta Ads</option></select></div>
+  <div><label>Severity threshold</label><input value="High"><div class="help" style="color:#E91A4F">⚠ Below 'High' will alert frequently</div></div>
+  <div><label>Auto-takedown</label><div class="checkrow"><div class="tog"></div>Enabled — files takedowns autonomously</div></div>
+</div>
+</body></html>
